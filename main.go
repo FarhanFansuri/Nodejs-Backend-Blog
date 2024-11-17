@@ -19,11 +19,17 @@ func main() {
 
 	// Konfigurasi koneksi ke database
 	var err error
-	dsn := "mysql://root:cpXgMZOIYXrwmnPLLYNPqVCmXbhLgZrj@autorack.proxy.rlwy.net:51123/railway"
-	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+
+	u, err := dburl.Parse("mysql://root:pxslSNiEWXDNzZVcyvnezDbjGelERBNs@autorack.proxy.rlwy.net:31251/railway?charset=utf8mb4&parseTime=True&loc=Local")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	db, err = gorm.Open(mysql.Open(u.DSN), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("Gagal terhubung ke database: %v", err)
 	}
+	fmt.Println("Terhubung")
 
 	// Migrasi tabel
 	db.AutoMigrate(&Buku{}, &Kategori{}, &User{})
