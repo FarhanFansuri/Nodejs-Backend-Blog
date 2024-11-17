@@ -15,11 +15,11 @@ var db *gorm.DB // Variabel global untuk koneksi database
 
 func main() {
 	// Membuat database jika belum ada
-	CreateDatabase()
+	// CreateDatabase()
 
 	// Konfigurasi koneksi ke database
 	var err error
-	dsn := "root:@tcp(127.0.0.1:3306)/buku?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "mysql://root:cpXgMZOIYXrwmnPLLYNPqVCmXbhLgZrj@autorack.proxy.rlwy.net:51123/railway"
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("Gagal terhubung ke database: %v", err)
@@ -47,20 +47,20 @@ func main() {
 	router.Run(":8080")
 }
 
-// Membuat database jika belum ada
-func CreateDatabase() {
-	dsn := "root:@tcp(127.0.0.1:3306)/"
-	db, err := sql.Open("mysql", dsn)
-	if err != nil {
-		log.Fatalf("Gagal terhubung ke MySQL: %v", err)
-	}
-	defer db.Close()
+// // Membuat database jika belum ada
+// func CreateDatabase() {
+// 	dsn := "mysql://root:cpXgMZOIYXrwmnPLLYNPqVCmXbhLgZrj@autorack.proxy.rlwy.net:51123/railway"
+// 	db, err := sql.Open("mysql", dsn)
+// 	if err != nil {
+// 		log.Fatalf("Gagal terhubung ke MySQL: %v", err)
+// 	}
+// 	defer db.Close()
 
-	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS buku")
-	if err != nil {
-		log.Fatalf("Gagal membuat database: %v", err)
-	}
-}
+// 	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS buku")
+// 	if err != nil {
+// 		log.Fatalf("Gagal membuat database: %v", err)
+// 	}
+// }
 
 // Handler untuk entitas Buku
 func CreateBuku(c *gin.Context) {
