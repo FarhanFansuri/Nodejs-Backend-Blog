@@ -39,6 +39,12 @@ func main() {
 	router := gin.Default()
 
 	// Routes CRUD Buku
+	router.GET("/", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "Ini adalah Home",
+			"urls":    []string{"/buku (GET)", "/buku/:id (GET)", "/buku (POST)", "/buku/:id (PUT)", "/buku/:id (DELETE)"},
+		})
+	})
 	router.POST("/buku", CreateBuku)
 	router.GET("/buku", GetAllBuku)
 	router.GET("/buku/:id", GetBukuByID)
