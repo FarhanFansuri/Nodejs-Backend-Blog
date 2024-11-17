@@ -1,12 +1,13 @@
 package main
 
 import (
-	"database/sql"
+	"fmt"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/xo/dburl"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
